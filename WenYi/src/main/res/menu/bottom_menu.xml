@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/tab1"
+          android:icon="@drawable/book"
+          android:title="同学录"/>
+
+    <item android:id="@+id/tab2"
+          android:icon="@drawable/message"
+          android:title="留言"/>
+
+    <item android:id="@+id/tab3"
+          android:icon="@drawable/my"
+          android:title="我的"/>
+
+
+</menu>
