@@ -1,9 +1,12 @@
 package com.demo.wenyi;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,7 +15,7 @@ import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
 	// 定义FragmentTabHost对象
-	private FragmentTabHost mTabHost;
+	private static FragmentTabHost mTabHost;
 
 	// 定义一个布局
 	private LayoutInflater layoutInflater;
@@ -22,17 +25,30 @@ public class MainActivity extends FragmentActivity {
 			Fragment3.class};
 
 	// 定义数组来存放按钮图片
-	private int mImageViewArray[] = {R.drawable.tab_selector1, R.drawable.tab_selector2,
-			R.drawable.tab_selector3};
+	private int mImageViewArray[] = {R.drawable.tab_selector1,
+			R.drawable.tab_selector2, R.drawable.tab_selector3};
 
 	// Tab选项卡的文字
 	private String mTextviewArray[] = {"首页", "消息", "我的"};
 
+	// Activity销毁时tab的位置
+	private static int currentTab;
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		Log.d("save", "oncreate---main---" + currentTab);
+		Log.d("save", "oncreate---main--" + mTabHost);
 		initView();
+		mTabHost.setCurrentTab(currentTab);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		currentTab = mTabHost.getCurrentTab();
+		Log.d("save", "ondestory---main--" + currentTab);
+		Log.d("save", "ondestory---main--" + mTabHost);
 	}
 
 	/**
@@ -52,7 +68,7 @@ public class MainActivity extends FragmentActivity {
 		for (int i = 0; i < count; i++) {
 			// 为每一个Tab按钮设置图标、文字和内容
 			TabHost.TabSpec tabSpec = mTabHost.newTabSpec(mTextviewArray[i])
-			                                  .setIndicator(getTabItemView(i));
+					.setIndicator(getTabItemView(i));
 			// 将Tab按钮添加进Tab选项卡中
 			mTabHost.addTab(tabSpec, fragmentArray[i], null);
 			// 设置Tab按钮的背景

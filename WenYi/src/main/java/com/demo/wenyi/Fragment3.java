@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 /**
  * Created by Administrator on 2016/4/17.
  */
-public class Fragment3 extends Fragment{
+public class Fragment3 extends MyBaseFragment {
+	private static View view3 ;
 
-    @Nullable
-    @Override
-    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container,
-                              @Nullable Bundle savedInstanceState) {
-        View  view  = inflater.inflate (R.layout.fragment3,container,false);
-        return view;
-    }
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		view3 = justOneFragment(inflater, container, view3, R.layout.fragment3);
+		return view3;
+	}
 }
